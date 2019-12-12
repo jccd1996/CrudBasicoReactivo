@@ -8,23 +8,25 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("developers")
+@RequestMapping("api/v1")
 @AllArgsConstructor
 public class DeveloperController {
 
+    private final String DEVELOPER_URL = "/developers/";
+
     private final DeveloperService developerService;
 
-    @GetMapping
+    @GetMapping(DEVELOPER_URL)
     public Flux<Developer> getAll() {
         return developerService.getAll();
     }
 
-    @GetMapping("{id}")
+    @GetMapping(DEVELOPER_URL +"{id}")
     public Mono getById(@PathVariable("id") final String id) {
         return developerService.getById(id) ;
     }
 
-    @PutMapping("{id}")
+    @PutMapping(DEVELOPER_URL +"{id}")
     public Mono updateById(@RequestBody final Developer developer) {
         return developerService.update(developer);
     }
@@ -34,7 +36,7 @@ public class DeveloperController {
         return developerService.save(developer);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping(DEVELOPER_URL +"{id}")
     public Mono delete(@PathVariable final String id) {
         return developerService.delete(id);
     }
