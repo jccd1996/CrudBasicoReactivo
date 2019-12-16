@@ -27,8 +27,9 @@ public class DeveloperController {
     }
 
     @PutMapping(DEVELOPER_URL +"{id}")
-    public Mono updateById(@RequestBody final Developer developer) {
-        return developerService.update(developer);
+    public Mono updateById(@PathVariable("id") final String id, @RequestBody final Developer developer) {
+
+        return developerService.update(id,developer);
     }
 
     @PostMapping(DEVELOPER_URL)
