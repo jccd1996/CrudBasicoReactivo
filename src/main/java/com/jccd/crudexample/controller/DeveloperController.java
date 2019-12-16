@@ -31,7 +31,7 @@ public class DeveloperController {
         return developerService.update(developer);
     }
 
-    @PostMapping
+    @PostMapping(DEVELOPER_URL)
     public Mono save(@RequestBody final Developer developer) {
         return developerService.save(developer);
     }

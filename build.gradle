@@ -33,6 +33,10 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	testImplementation 'io.projectreactor:reactor-test'
+
+	testCompile 'junit:junit:4.12'
+	implementation 'junit:junit:4.12'
+
 }
 
 test {
