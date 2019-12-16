@@ -34,10 +34,16 @@ class DeveloperControllerTest {
 
     @Test
     void getById() {
-        Developer developer = Developer.builder().id("5df2601d50dad32f9b7e36aa").city("Ibague").name("Camilo Cubillos").technology("Mobile").build();
+        Developer developer = Developer.builder()
+                .id("5df2601d50dad32f9b7e36aa")
+                .city("Ibague")
+                .name("Camilo Cubillos")
+                .technology("Mobile")
+                .build();
         Mono<Developer> developerMono = Mono.just(developer);
 
         Mockito.when(developerService.getById("5df2601d50dad32f9b7e36aa")).thenReturn(developerMono);
+
 
         webTestClient.get()
                 .uri("/api/v1/developers/5df2601d50dad32f9b7e36aa")
@@ -52,8 +58,45 @@ class DeveloperControllerTest {
                 });
     }
 
+
+    //TODO Arregla el método put para el test.
     @Test
     void updateById() {
+//        Developer oldDeveloper = Developer.builder().id("123456").city("Espinal").name("Tobias Pacheco").technology("DataBase").build();
+//        Mono<Developer> oldDeveloperMono = Mono.just(oldDeveloper);
+//
+//        Mockito.when(developerService.save(oldDeveloper)).thenReturn(oldDeveloperMono);
+//
+//        webTestClient.post()
+//                .uri("/api/v1/developers/")
+//                .accept(MediaType.APPLICATION_JSON)
+//                .body(oldDeveloperMono,Developer.class)
+//                .exchange()
+//                .expectStatus().isOk()
+//                .expectBody(Developer.class)
+//                .value(devResponse ->{
+//                    Assertions.assertEquals(devResponse.getName(), oldDeveloper.getName());
+//                    Assertions.assertEquals(devResponse.getCity(), oldDeveloper.getCity());
+//                    Assertions.assertEquals(devResponse.getTechnology(), oldDeveloper.getTechnology());
+//                });
+//
+//
+//        Developer newDeveloper = Developer.builder().id("123456").city("Ibague").name("Tobias Pacheco").technology("Mobile").build();
+//        Mono<Developer> newDeveloperMono = Mono.just(newDeveloper);
+//
+//        Mockito.when(developerService.update(newDeveloper)).thenReturn(Mono.just(newDeveloperMono));
+//        webTestClient.put()
+//                .uri("/api/v1/developers/5df7a5e96736ae22e1ecd2f3")
+//                .accept(MediaType.APPLICATION_JSON)
+//                .exchange()
+//                .expectStatus().isOk()
+//                .expectBody(Developer.class)
+//                .value(devResponse ->{
+//                    Assertions.assertEquals(devResponse.getName(), newDeveloper.getName());
+//                });
+
+
+
     }
 
     @Test
@@ -79,5 +122,13 @@ class DeveloperControllerTest {
 
     @Test
     void delete() {
+        Mockito.when(developerService.delete("5df7a5e96736ae22e1ecd2f3")).thenReturn(Mono.just("Eliminación correcta"));
+
+        webTestClient.delete()
+                .uri("/api/v1/developers/5df7a5e96736ae22e1ecd2f3")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(String.class)
+                .isEqualTo("\"Eliminación correcta\"");
     }
 }

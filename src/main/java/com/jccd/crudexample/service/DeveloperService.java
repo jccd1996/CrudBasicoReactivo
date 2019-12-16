@@ -40,7 +40,7 @@ public class DeveloperService {
             return Mono.empty();
         }
         return getById(id).switchIfEmpty(Mono.empty()).filter(Objects::nonNull).flatMap(developerToBeDeleted -> developerRepository
-                .delete(developerToBeDeleted).then(Mono.just(developerToBeDeleted)));
+                .delete(developerToBeDeleted).then(Mono.just("Eliminación correcta")));
     }
 
 
